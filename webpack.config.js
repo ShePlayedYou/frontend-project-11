@@ -23,14 +23,6 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css', 
         }),
-        new CopyPlugin({
-            patterns: [
-                {
-                    from: path.resolve(__dirname, './public/images/'),
-                    to: path.resolve(__dirname, './dist/images/')
-                }
-            ]
-        }),
        new ESLintPlugin(),
     ],
     module: {
