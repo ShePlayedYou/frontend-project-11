@@ -20,5 +20,15 @@ export default function renderForm(state) {
     feedback.textContent = i18next.t('form.invalid');
     feedback.classList.remove('text-success');
     feedback.classList.add('text-danger');
-  }
+  } else if (state.formState.errorType === 'form.disconnected') {
+    formControl.classList.add('is-invalid')
+    feedback.textContent = i18next.t('form.disconnected');
+    feedback.classList.remove('text-success');
+    feedback.classList.add('text-danger');
+  } else if (state.formState.errorType === 'form.parseError') {
+    formControl.classList.add('is-invalid')
+    feedback.textContent = i18next.t('form.parseError');
+    feedback.classList.remove('text-success');
+    feedback.classList.add('text-danger');
+  } 
 };

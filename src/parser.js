@@ -1,15 +1,12 @@
-/* global console, DOMParser */
-
-import axios from "axios";
+/* global DOMParser */
 
 let postCounter = 0;
 const generatePostId = () => `post_${postCounter += 1}`;
 
-const parseUrl = (value) => {
-  const proxyUrl = `https://allorigins.hexlet.app/get?disableCache=true&url=${encodeURIComponent(value)}`;
+let feedCounter = 0;
+const generateFeedId = () => `feed_${feedCounter += 1}`;
 
-  return axios.get(proxyUrl)
-  .then((response) => {
+const dataParser = (response) => {
     const parser = new DOMParser();
     const xml = parser.parseFromString(response.data.contents, 'application/xml');
     
@@ -22,22 +19,22 @@ const parseUrl = (value) => {
     const mainDescriptionFromRSS = xml.querySelector('channel > description');
     const allItemsFromRSS = xml.querySelectorAll('item');
 
+    const feedId = generateFeedId();
+
     const posts = Array.from(allItemsFromRSS).map((item) => ({
-      title: item.querySelector('title')?.textContent,
-      description: item.querySelector('description')?.textContent,
-      link: item.querySelector('link')?.textContent,
+      id: generatePostId(),
+      feedId,
+      title: item.querySelector('title')?.textContent ?? '',
+      description: item.querySelector('description')?.textContent ?? '',
+      link: item.querySelector('link')?.textContent ?? '',
     }));
 
-    return {
-      id: generatePostId(),
-      feedTitle: mainTitleFromRSS.textContent,
-      feedDescription: mainDescriptionFromRSS.textContent,
-      feedItems: posts
+    const feed = {
+        id: feedId,
+        feedTitle: mainTitleFromRSS?.textContent ?? '',
+        feedDescription: mainDescriptionFromRSS?.textContent ?? '',
     }
-  })
-  .catch((error) => {
-    console.error('Ошибка запроса:', error);
-  });    
-}
+    return { feed, posts}
+};
 
-export default parseUrl;
+export default dataParser;
