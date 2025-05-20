@@ -1,27 +1,25 @@
-/* global DOMParser */
-
 let postCounter = 0;
-const generatePostId = () => `post_${postCounter += 1}`;
+const generatePostId = () => `${postCounter += 1}`;
 
 let feedCounter = 0;
-const generateFeedId = () => `feed_${feedCounter += 1}`;
+const generateFeedId = () => `${feedCounter += 1}`;
 
-const dataParser = (response) => {
+const dataParser = (response, existingFeedId = null) => {
     const parser = new DOMParser();
     const xml = parser.parseFromString(response.data.contents, 'application/xml');
-    
+  
     const parseError = xml.querySelector('parsererror');
-      if (parseError) {
-        throw new Error('parseError');
-      }
-
+    if (parseError) {
+      throw new Error('parseError');
+    }
+  
     const mainTitleFromRSS = xml.querySelector('channel > title');
     const mainDescriptionFromRSS = xml.querySelector('channel > description');
     const allItemsFromRSS = xml.querySelectorAll('item');
-
-    const feedId = generateFeedId();
-
-    const posts = Array.from(allItemsFromRSS).map((item) => ({
+  
+    const feedId = existingFeedId ?? generateFeedId();
+  
+    const posts = Array.from(allItemsFromRSS).reverse().map((item) => ({
       id: generatePostId(),
       feedId,
       title: item.querySelector('title')?.textContent ?? '',
@@ -29,12 +27,16 @@ const dataParser = (response) => {
       link: item.querySelector('link')?.textContent ?? '',
     }));
 
+    console.log(posts, 'allItemsFromRSS posts')
+  
     const feed = {
-        id: feedId,
-        feedTitle: mainTitleFromRSS?.textContent ?? '',
-        feedDescription: mainDescriptionFromRSS?.textContent ?? '',
-    }
-    return { feed, posts}
-};
+      id: feedId,
+      feedTitle: mainTitleFromRSS?.textContent ?? '',
+      feedDescription: mainDescriptionFromRSS?.textContent ?? '',
+    };
+  
+    return { feed, posts };
+  };
+  
 
 export default dataParser;

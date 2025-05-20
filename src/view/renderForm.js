@@ -1,4 +1,3 @@
-/* global document */
 import i18next from 'i18next';
 
 export default function renderForm(state) {
