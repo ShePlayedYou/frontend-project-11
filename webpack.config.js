@@ -1,11 +1,12 @@
-/* eslint-env node */
+/* global require, module, __dirname */
+/* eslint no-undef: "off" */
 
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-// const CopyPlugin = require('copy-webpack-plugin') // Не используется — закомментировал
+// const CopyPlugin = require('copy-webpack-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
 
 module.exports = {
