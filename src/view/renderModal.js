@@ -14,7 +14,6 @@ export default function renderModal(state) {
   const postLink = document.querySelector((`a[data-id="${post.id}"]`));
   postLink.classList.remove('fw-bold');
   postLink.classList.add('fw-normal', 'link-secondary');
-  console.log(postLink, 'postLink')
 
   modalTitle.textContent = post.title;
   modalBody.textContent = post.description || 'Описание отсутствует';

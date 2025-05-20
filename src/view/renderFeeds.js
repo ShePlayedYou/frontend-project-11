@@ -12,9 +12,6 @@ export default function renderFeeds(state) {
   const feedsCard = createFeedsCard();
   const postsCard = createPostsCard();
 
-  console.log(feedsCard, 'feedsCard')
-  console.log(postsCard, 'postsCard')
-
   feeds.append(feedsCard);
   posts.append(postsCard);
 
@@ -23,8 +20,6 @@ export default function renderFeeds(state) {
 
 
   state.feedData.forEach((el) => {
-    console.log(el.feedTitle);
-
 
     const liFeed = document.createElement('li');
     liFeed.classList.add('list-group-item', 'border-0', 'border-end-0');

@@ -27,7 +27,6 @@ const dataParser = (response, existingFeedId = null) => {
       link: item.querySelector('link')?.textContent ?? '',
     }));
 
-    console.log(posts, 'allItemsFromRSS posts')
   
     const feed = {
       id: feedId,

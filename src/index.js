@@ -41,7 +41,6 @@ const form = document.querySelector('.rss-form');
 const posts = document.querySelector('.posts');
 
 const watchedState = onChange(state, function (path) {
-  console.log(path, ' PATH ')
   // автообновление формы
   if (path.startsWith('formState')) {
     renderForm(this);
@@ -50,7 +49,6 @@ const watchedState = onChange(state, function (path) {
   // автообновление фидов и постов
   if (path.startsWith('postData') || path.startsWith('feedData')) {
     renderFeeds(this);
-    console.log('🔁 renderFeeds вызван', state.postData.length);
   }
 
   if (path.startsWith('currentModalPostId')) {
@@ -82,16 +80,12 @@ form.addEventListener("submit", (e) => {
     .then(() => fetchUrl(value))
     .then((response) => parse(response))
     .then((data) => {
-      console.log(data, 'data feed and posts')
       const { feed, posts } = data;
       const fullFeed = { ...feed, url: value };
       watchedState.feedData.push(fullFeed);
       watchedState.postData.push(...posts);
-      console.log(state.feedData, 'state.feedData')
-      console.log(state.postData, 'state.postData')
       watchedState.feedsUrls.push({ id: uniqueId('url_'), url: value });
       watchedState.formState.isValid = true;
-      console.log(state.feedData, 'feedData')
       
       watchedState.formState.inputData = '';
       const input = form.querySelector('.form-control');

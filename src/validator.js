@@ -5,7 +5,6 @@ const schema = Yup.object().shape({
 });
 
 const validate = (url) => {
-    console.log(url);
     return schema.validate(url)
   };
 
