@@ -7,17 +7,30 @@ module.exports = (async () => {
 
   return [
     {
-      files: ['webpack.config.js'],
+      ignores: ['node_modules/**', 'dist/**'],
+    },
+    {
+      files: ['**/*.js'],
       languageOptions: {
         ecmaVersion: 2021,
-        sourceType: 'commonjs',
+        sourceType: 'module',
         globals: {
+          ...globals.browser,
           ...globals.node,
         },
       },
+      plugins: {
+        '@stylistic': stylistic.default,
+      },
       rules: {
-        // Можно добавить специфические правила сюда, если нужно
-        'no-undef': 'off', // отключаем если require ругается
+        ...js.configs.recommended.rules,
+        'no-undef': 'off',
+      },
+    },
+    {
+      files: ['webpack.config.js'],
+      languageOptions: {
+        sourceType: 'commonjs',
       },
     },
     {
