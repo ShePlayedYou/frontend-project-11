@@ -1,5 +1,8 @@
 install:
-	npm ci
+	npm install
 
 lint:
-	npx eslint src
+	npx eslint .
+
+run:
+	npm run serve
