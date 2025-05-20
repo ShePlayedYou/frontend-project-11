@@ -58,15 +58,15 @@ const watchedState = onChange(state, function (path) {
   }
 })
 
-form.addEventListener('input', e => {
+form.addEventListener('input', (e) => {
   watchedState.formState.inputData = e.target.value
 })
 
-form.addEventListener('submit', e => {
+form.addEventListener('submit', (e) => {
   e.preventDefault()
   const value = watchedState.formState.inputData
 
-  const isUniqUrl = watchedState.feedsUrls.some(feed => feed.url === value)
+  const isUniqUrl = watchedState.feedsUrls.some((feed) => feed.url === value)
   if (isUniqUrl) {
     watchedState.formState.isValid = false
     watchedState.formState.errorType = 'form.notUnique'
@@ -75,8 +75,8 @@ form.addEventListener('submit', e => {
 
   validate({ url: value })
     .then(() => fetchUrl(value))
-    .then(response => parse(response))
-    .then(data => {
+    .then((response) => parse(response))
+    .then((data) => {
       const { feed, posts } = data
       const fullFeed = { ...feed, url: value }
       watchedState.feedData.push(fullFeed)
@@ -89,7 +89,7 @@ form.addEventListener('submit', e => {
       input.value = ''
       input.focus()
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('Ошибка загрузки RSS:', error)
       const key = getErrorKey(error)
       watchedState.formState.errorType = key
@@ -98,20 +98,20 @@ form.addEventListener('submit', e => {
 })
 
 function checkFeedsPeriodically() {
-  const requests = watchedState.feedsUrls.map(feedInfo => {
-    const feed = watchedState.feedData.find(f => f.url === feedInfo.url)
+  const requests = watchedState.feedsUrls.map((feedInfo) => {
+    const feed = watchedState.feedData.find((f) => f.url === feedInfo.url)
     if (!feed) return Promise.resolve()
 
     return fetchUrl(feedInfo.url)
-      .then(response => parse(response, feed.id)) // передаём старый id
+      .then((response) => parse(response, feed.id)) // передаём старый id
       .then(({ posts }) => {
-        const existingLinks = watchedState.postData.map(post => post.link)
-        const newPosts = posts.filter(post => !existingLinks.includes(post.link))
+        const existingLinks = watchedState.postData.map((post) => post.link)
+        const newPosts = posts.filter((post) => !existingLinks.includes(post.link))
         if (newPosts.length > 0) {
           watchedState.postData = [...watchedState.postData, ...newPosts]
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Ошибка обновления фида:', error)
         const key = getErrorKey(error)
         watchedState.formState.errorType = key
@@ -123,7 +123,7 @@ function checkFeedsPeriodically() {
     setTimeout(checkFeedsPeriodically, 5000)
   })
 
-  posts.addEventListener('click', e => {
+  posts.addEventListener('click', (e) => {
     const link = e.target.closest('a[data-id]')
     if (link) {
       const id = link.dataset.id

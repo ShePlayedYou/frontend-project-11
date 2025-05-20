@@ -13,6 +13,7 @@ module.exports = (async () => {
         sourceType: 'module',
         globals: {
           ...globals.browser,
+          ...globals.node,
         },
       },
       plugins: {
@@ -25,7 +26,7 @@ module.exports = (async () => {
         '@stylistic/eol-last': ['error', 'always'],
         '@stylistic/no-trailing-spaces': 'error',
         '@stylistic/no-multiple-empty-lines': ['error', { max: 1 }],
-        '@stylistic/arrow-parens': ['error', 'as-needed'],
+        '@stylistic/arrow-parens': ['error', 'always'],
         '@stylistic/brace-style': ['error', '1tbs'],
         '@stylistic/padded-blocks': ['error', 'never'],
         '@stylistic/comma-dangle': ['error', 'always-multiline'],
