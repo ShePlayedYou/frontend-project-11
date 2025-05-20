@@ -1,4 +1,4 @@
-import * as Yup from 'yup';
+import * as Yup from 'yup'
 
 Yup.setLocale({
   mixed: {
@@ -6,5 +6,5 @@ Yup.setLocale({
   },
   string: {
     url: () => ({ key: 'form.invalid' }),
-  }
-});
+  },
+})

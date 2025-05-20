@@ -1,24 +1,22 @@
 const createFeedsCard = () => {
+  const cardFeeds = document.createElement('div')
+  cardFeeds.classList.add('card', 'border-0')
 
-  const cardFeeds = document.createElement('div');
-  cardFeeds.classList.add('card', 'border-0');
+  const cardBodyFeeds = document.createElement('div')
+  cardBodyFeeds.classList.add('card-body')
 
-  const cardBodyFeeds = document.createElement('div');
-  cardBodyFeeds.classList.add('card-body');
+  const cardTitleFeeds = document.createElement('h2')
+  cardTitleFeeds.classList.add('card-title', 'h4')
+  cardTitleFeeds.textContent = 'Фиды'
 
-  const cardTitleFeeds = document.createElement('h2');
-  cardTitleFeeds.classList.add('card-title', 'h4');
-  cardTitleFeeds.textContent = 'Фиды';
+  const cardUlFeeds = document.createElement('ul')
+  cardUlFeeds.classList.add('list-group', 'border-0', 'rounded-0')
 
-  const cardUlFeeds = document.createElement('ul');
-  cardUlFeeds.classList.add('list-group', 'border-0', 'rounded-0');
+  cardBodyFeeds.appendChild(cardTitleFeeds)
+  cardBodyFeeds.appendChild(cardUlFeeds)
+  cardFeeds.appendChild(cardBodyFeeds)
 
+  return cardFeeds
+}
 
-  cardBodyFeeds.appendChild(cardTitleFeeds);
-  cardBodyFeeds.appendChild(cardUlFeeds);
-  cardFeeds.appendChild(cardBodyFeeds);
-
-  return cardFeeds;
-};
-
-export default createFeedsCard;
+export default createFeedsCard
