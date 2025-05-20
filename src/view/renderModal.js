@@ -9,7 +9,7 @@ export default function renderModal(state) {
   const modalFooter = modalElement.querySelector('.modal-footer')
   const link = modalFooter?.querySelector('a')
 
-  const post = state.postData.find((p) => p.id === state.currentModalPostId)
+  const post = state.postData.find(p => p.id === state.currentModalPostId)
   if (!post) return
   const postLink = document.querySelector((`a[data-id="${post.id}"]`))
   postLink.classList.remove('fw-bold')

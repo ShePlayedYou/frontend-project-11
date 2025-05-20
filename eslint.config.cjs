@@ -7,7 +7,21 @@ module.exports = (async () => {
 
   return [
     {
-      ...js.configs.recommended,
+      files: ['webpack.config.js'],
+      languageOptions: {
+        ecmaVersion: 2021,
+        sourceType: 'commonjs',
+        globals: {
+          ...globals.node,
+        },
+      },
+      rules: {
+        // Можно добавить специфические правила сюда, если нужно
+        'no-undef': 'off', // отключаем если require ругается
+      },
+    },
+    {
+      files: ['**/*.js'],
       languageOptions: {
         ecmaVersion: 2021,
         sourceType: 'module',
@@ -26,7 +40,7 @@ module.exports = (async () => {
         '@stylistic/eol-last': ['error', 'always'],
         '@stylistic/no-trailing-spaces': 'error',
         '@stylistic/no-multiple-empty-lines': ['error', { max: 1 }],
-        '@stylistic/arrow-parens': ['error', 'always'],
+        '@stylistic/arrow-parens': ['error', 'as-needed'],
         '@stylistic/brace-style': ['error', '1tbs'],
         '@stylistic/padded-blocks': ['error', 'never'],
         '@stylistic/comma-dangle': ['error', 'always-multiline'],

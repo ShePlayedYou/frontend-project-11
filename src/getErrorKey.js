@@ -1,4 +1,4 @@
-const getErrorKey = (error) => {
+const getErrorKey = error => {
   // Ошибка сети
   if (error.code === 'ERR_NETWORK') {
     return 'form.disconnected'

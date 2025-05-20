@@ -16,7 +16,7 @@ export default function renderFeeds(state) {
 
   // all li
 
-  state.feedData.forEach((el) => {
+  state.feedData.forEach(el => {
     const liFeed = document.createElement('li')
     liFeed.classList.add('list-group-item', 'border-0', 'border-end-0')
 
@@ -34,7 +34,7 @@ export default function renderFeeds(state) {
     ulFeeds.prepend(liFeed)
   })
 
-  state.postData.forEach((post) => {
+  state.postData.forEach(post => {
     const li = document.createElement('li')
     li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0')
 

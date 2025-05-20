@@ -19,7 +19,7 @@ const dataParser = (response, existingFeedId = null) => {
 
   const feedId = existingFeedId ?? generateFeedId()
 
-  const posts = Array.from(allItemsFromRSS).reverse().map((item) => ({
+  const posts = Array.from(allItemsFromRSS).reverse().map(item => ({
     id: generatePostId(),
     feedId,
     title: item.querySelector('title')?.textContent ?? '',

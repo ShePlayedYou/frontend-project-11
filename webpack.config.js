@@ -1,9 +1,11 @@
+/* eslint-env node */
+
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
+// const CopyPlugin = require('copy-webpack-plugin') // Не используется — закомментировал
 const ESLintPlugin = require('eslint-webpack-plugin')
 
 module.exports = {
@@ -12,10 +14,8 @@ module.exports = {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, './dist/'),
     clean: true,
-
   },
   plugins: [
-    require('autoprefixer'),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, './public/index.html'),
     }),
@@ -28,15 +28,20 @@ module.exports = {
     rules: [
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader',
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
           {
             loader: 'sass-loader',
             options: {
               sassOptions: {
-                quietDeps: true, // Отключение предупреждений
+                quietDeps: true,
               },
             },
-          }],
+          },
+        ],
       },
       {
         test: /\.css$/,
@@ -44,7 +49,7 @@ module.exports = {
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: 'asset/resource', // !! Для шрифтов подключение
+        type: 'asset/resource',
       },
     ],
   },
