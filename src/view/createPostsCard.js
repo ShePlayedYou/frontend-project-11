@@ -1,3 +1,5 @@
+import i18next from 'i18next'
+
 const createPostsCard = () => {
   const cardPosts = document.createElement('div')
   cardPosts.classList.add('card', 'border-0')
@@ -7,7 +9,7 @@ const createPostsCard = () => {
 
   const cardTitlePosts = document.createElement('h2')
   cardTitlePosts.classList.add('card-title', 'h4')
-  cardTitlePosts.textContent = 'Посты'
+  cardTitlePosts.textContent = i18next.t('form.posts')
 
   const cardUlPosts = document.createElement('ul')
   cardUlPosts.classList.add('list-group', 'border-0', 'rounded-0')

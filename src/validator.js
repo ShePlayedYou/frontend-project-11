@@ -1,11 +1,18 @@
 import * as Yup from 'yup'
 
-const schema = Yup.object().shape({
-  url: Yup.string().strict(true).url(),
-})
+const makeSchema = existingUrls =>
+  Yup.object().shape({
+    url: Yup.string()
+      .strict(true)
+      .required('form.required')
+      .url('form.invalid')
+      .notOneOf(existingUrls, 'form.notUnique'),
+  })
 
-const validate = (url) => {
-  return schema.validate(url)
+const validate = (data, existingUrls = []) => {
+  const schema = makeSchema(existingUrls)
+  console.log(existingUrls, 'existingUrls')
+  return schema.validate(data)
 }
 
 export default validate

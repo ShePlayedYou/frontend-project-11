@@ -8,6 +8,8 @@ const resources = {
         required: 'Поле обязательно для заполнения',
         disconnected: 'Ошибка сети',
         parseError: 'Ресурс не содержит валидный RSS',
+        feeds: 'Фиды',
+        posts: 'Посты',
       },
     },
   },

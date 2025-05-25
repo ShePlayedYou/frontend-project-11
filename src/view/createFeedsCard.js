@@ -1,3 +1,5 @@
+import i18next from 'i18next'
+
 const createFeedsCard = () => {
   const cardFeeds = document.createElement('div')
   cardFeeds.classList.add('card', 'border-0')
@@ -7,7 +9,7 @@ const createFeedsCard = () => {
 
   const cardTitleFeeds = document.createElement('h2')
   cardTitleFeeds.classList.add('card-title', 'h4')
-  cardTitleFeeds.textContent = 'Фиды'
+  cardTitleFeeds.textContent = i18next.t('form.feeds')
 
   const cardUlFeeds = document.createElement('ul')
   cardUlFeeds.classList.add('list-group', 'border-0', 'rounded-0')
