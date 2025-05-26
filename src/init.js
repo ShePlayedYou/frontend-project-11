@@ -49,7 +49,6 @@ const init = () => {
         input.focus()
       })
       .catch((error) => {
-        console.error('Error loading RSS:', error)
         throw error
       })
   }
@@ -85,6 +84,7 @@ const init = () => {
           }
         })
         .catch((error) => {
+          console.error('Error RSS checking periodically:', error)
           watchedState.formState.errorType = error.message
           watchedState.formState.isValid = false
         })
@@ -93,17 +93,17 @@ const init = () => {
     Promise.all(requests).finally(() => {
       setTimeout(checkFeedsPeriodically, 5000)
     })
-
-    posts.addEventListener('click', (e) => {
-      const target = e.target.closest('[data-id]')
-      if (!target) return
-      const id = target.dataset.id
-      watchedState.viewedPostIds.add(id)
-      if (target.matches('button[data-bs-toggle="modal"]')) {
-        watchedState.currentModalPostId = id
-      }
-    })
   }
+
+  posts.addEventListener('click', (e) => {
+    const target = e.target.closest('[data-id]')
+    if (!target) return
+    const id = target.dataset.id
+    watchedState.viewedPostIds.add(id)
+    if (target.matches('button[data-bs-toggle="modal"]')) {
+      watchedState.currentModalPostId = id
+    }
+  })
 
   checkFeedsPeriodically()
 }

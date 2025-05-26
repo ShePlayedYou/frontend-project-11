@@ -11,7 +11,6 @@ const makeSchema = existingUrls =>
 
 const validate = (data, existingUrls = []) => {
   const schema = makeSchema(existingUrls)
-  console.log(existingUrls, 'existingUrls')
   return schema.validate(data)
 }
 
